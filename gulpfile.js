@@ -121,8 +121,6 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-
-
 gulp.task('mainhtmlserve', () => {
   return gulp
     .src('app/index.html')
@@ -173,7 +171,7 @@ gulp.task('infohtmlserve', () => {
 
 
 gulp.task('serve', () => {
-  runSequence(['clean', 'wiredep'], ['html', 'css', 'js', 'dbhelper', 'sw', 'fonts'], () => {
+  runSequence(['clean', 'wiredep'], ['html', 'styles', 'scripts', 'dbhelper', 'sw', 'fonts'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
