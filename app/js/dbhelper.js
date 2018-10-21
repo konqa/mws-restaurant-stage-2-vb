@@ -25,10 +25,12 @@ class DBHelper {
     }
 
 
-    fetch(DBHelper.DATABASE_URL)
+
+
+    fetch(sourceURL)
     .then(function(response) {
-      return response.json();
-      // console.log(response.json());
+      // return response.json();
+      console.log('DB Helper response: ', response);
   })
 
 
