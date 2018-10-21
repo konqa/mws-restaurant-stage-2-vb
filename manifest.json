@@ -2,7 +2,7 @@
   "short_name": "MWSRestaurantReviews",
   "name": "MWS Restaurant Reviews",
   "start_url": "index.html",
-  "background_color": "#262932",
-  "theme_color": "#262932",
+  "background_color": "#fff",
+  "theme_color": "#fff",
   "display": "fullscreen"
 }

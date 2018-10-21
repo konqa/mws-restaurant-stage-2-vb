@@ -1,77 +1,42 @@
 /**
  * Common database helper functions.
  */
-
-fetch('http://localhost:1337/restaurants').then(function(response) {
-    console.log(response.json())
-})
-
-
-
-
-
-
 class DBHelper {
 
   /**
    * Database URL.
-   * Change this to restaurants data source location on your server.
+   * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
     return `http://localhost:${port}/restaurants`;
   }
-  
-  
+
   /**
    * Fetch all restaurants.
    */
-  static fetchRestaurants(id, callback) {
+  static fetchRestaurants(callback) {
     let sourceURL;
-    // if (!id) {
-      sourceURL = DBHelper.DATABASE_URL;
-    // } else {
-    //   sourceURL = `${DBHelper.DATABASE_URL}/${id}`;
-    // }
-
-    console.log('tirikuyedza blaz');
-    
-
-
+    sourceURL = DBHelper.DATABASE_URL;
     fetch(sourceURL)
     .then(response => {
-      response.json()
-        .then(restaurants => {
-          if (restaurants.length) {
-            // Get all neighborhoods from all restaurants
-            const neighborhoods = restaurants.map((v, i) => restaurants[i].neighborhood);
-            // Remove duplicates from neighborhoods
-            let fetchedNeighborhoods = neighborhoods.filter((v, i) => neighborhoods.indexOf(v) == i);
-            // Get all cuisines from all restaurants
-            const cuisines = restaurants.map((v, i) => restaurants[i].cuisine_type);
-            // Remove duplicates from cuisines
-            let fetchedCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i);
-          }
-
-          callback(null, restaurants);
-        });
-    }).catch(error => {
-      callback(`Request failed. Returned ${error}`, null);
-    });
-
+      return response.json();
+    })
+    .then(data => callback(null, data))
+    .catch(error => callback(`Failed request. ${error}`, null));
+  
   }
-
 
   /**
    * Fetch a restaurant by its ID.
    */
   static fetchRestaurantById(id, callback) {
-    // fetch all restaurants with proper error handling.
+  // fetch all restaurants with proper error handling.
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
-        const restaurant = restaurants;
+        const restaurant = restaurants.find(r => r.id == id);
         if (restaurant) { // Got the restaurant
           callback(null, restaurant);
         } else { // Restaurant does not exist in the database
@@ -181,7 +146,7 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    return (`/img/${restaurant.photograph}`);
+    return (`/img/${restaurant.id}.jpg`);
   }
 
   /**
