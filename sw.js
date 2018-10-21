@@ -15,8 +15,11 @@ const urlsCached = [
   'img/8.jpg',
   'img/9.jpg',
   'img/10.jpg',
+  'img/icons/192.png',
+  'img/icons/512.png',
   'css/styles.css',
   'css/responsive.css',
+  'js/idb.js',
   'js/dbhelper.js',
   'js/main.js',
   'js/restaurant_info.js'
